@@ -1,166 +1,172 @@
 # SPDX-License-Identifier: GPL-2.0
 
 menuconfig SAMPLES_RUST
-	bool "Rust samples"
-	depends on RUST
-	help
-	  You can build sample Rust kernel code here.
+bool "Rust samples"
+depends on RUST
+help
+You can build sample Rust kernel code here.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 if SAMPLES_RUST
 
 config SAMPLE_RUST_MINIMAL
-	tristate "Minimal"
-	help
-	  This option builds the Rust minimal module sample.
+tristate "Minimal"
+help
+This option builds the Rust minimal module sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_minimal.
+      To compile this as a module, choose M here:
+      the module will be called rust_minimal.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_PRINT
-	tristate "Printing macros"
-	help
-	  This option builds the Rust printing macros sample.
+tristate "Printing macros"
+help
+This option builds the Rust printing macros sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_print.
+      To compile this as a module, choose M here:
+      the module will be called rust_print.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_MODULE_PARAMETERS
-	tristate "Module parameters"
-	help
-	  This option builds the Rust module parameters sample.
+tristate "Module parameters"
+help
+This option builds the Rust module parameters sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_module_parameters.
+      To compile this as a module, choose M here:
+      the module will be called rust_module_parameters.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_SYNC
-	tristate "Synchronisation primitives"
-	help
-	  This option builds the Rust synchronisation primitives sample.
+tristate "Synchronisation primitives"
+help
+This option builds the Rust synchronisation primitives sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_sync.
+      To compile this as a module, choose M here:
+      the module will be called rust_sync.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_CHRDEV
-	tristate "Character device"
-	help
-	  This option builds the Rust character device sample.
+tristate "Character device"
+help
+This option builds the Rust character device sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_chrdev.
+      To compile this as a module, choose M here:
+      the module will be called rust_chrdev.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_MISCDEV
-	tristate "Miscellaneous device"
-	help
-	  This option builds the Rust miscellaneous device sample.
+tristate "Miscellaneous device"
+help
+This option builds the Rust miscellaneous device sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_miscdev.
+      To compile this as a module, choose M here:
+      the module will be called rust_miscdev.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_STACK_PROBING
-	tristate "Stack probing"
-	help
-	  This option builds the Rust stack probing sample.
+tristate "Stack probing"
+help
+This option builds the Rust stack probing sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_stack_probing.
+      To compile this as a module, choose M here:
+      the module will be called rust_stack_probing.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_SEMAPHORE
-	tristate "Semaphore"
-	help
-	  This option builds the Rust semaphore sample.
+tristate "Semaphore"
+help
+This option builds the Rust semaphore sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_semaphore.
+      To compile this as a module, choose M here:
+      the module will be called rust_semaphore.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_SEMAPHORE_C
-	tristate "Semaphore (in C, for comparison)"
-	help
-	  This option builds the Rust semaphore sample (in C, for comparison).
+tristate "Semaphore (in C, for comparison)"
+help
+This option builds the Rust semaphore sample (in C, for comparison).
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_semaphore_c.
+      To compile this as a module, choose M here:
+      the module will be called rust_semaphore_c.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_RANDOM
-	tristate "Random"
-	help
-	  This option builds the Rust random sample.
+tristate "Random"
+help
+This option builds the Rust random sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_random.
+      To compile this as a module, choose M here:
+      the module will be called rust_random.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_PLATFORM
-	tristate "Platform device driver"
-	help
-	  This option builds the Rust platform device driver sample.
+tristate "Platform device driver"
+help
+This option builds the Rust platform device driver sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_platform.
+      To compile this as a module, choose M here:
+      the module will be called rust_platform.
 
 config SAMPLE_RUST_FS
-	tristate "File system"
-	help
-	  This option builds the Rust file system sample.
+tristate "File system"
+help
+This option builds the Rust file system sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_fs.
+      To compile this as a module, choose M here:
+      the module will be called rust_fs.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_NETFILTER
-	tristate "Network filter module"
-	depends on NETFILTER
-	help
-	  This option builds the Rust netfilter module sample.
+tristate "Network filter module"
+depends on NETFILTER
+help
+This option builds the Rust netfilter module sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_netfilter.
+      To compile this as a module, choose M here:
+      the module will be called rust_netfilter.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_ECHO_SERVER
-	tristate "Echo server module"
-	help
-	  This option builds the Rust echo server  module sample.
+tristate "Echo server module"
+help
+This option builds the Rust echo server module sample.
 
-	  To compile this as a module, choose M here:
-	  the module will be called rust_echo_server.
+      To compile this as a module, choose M here:
+      the module will be called rust_echo_server.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_HOSTPROGS
-	bool "Host programs"
-	help
-	  This option builds the Rust host program samples.
+bool "Host programs"
+help
+This option builds the Rust host program samples.
 
-	  If unsure, say N.
+      If unsure, say N.
 
 config SAMPLE_RUST_SELFTESTS
-	tristate "Self tests"
-	help
-	  This option builds the self test cases for Rust.
+tristate "Self tests"
+help
+This option builds the self test cases for Rust.
 
-	  If unsure, say N.
+      If unsure, say N.
 
+config SAMPLE_RUST_HELLOWORLD
+tristate "Print Helloworld in Rust"
+help
+This option enables the My Rust Module. It is a minimal sample that prints "Hello World from Rust module" on initialization.
+
+      If unsure, say N.
 endif # SAMPLES_RUST

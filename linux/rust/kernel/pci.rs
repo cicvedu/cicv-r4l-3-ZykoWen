@@ -267,7 +267,7 @@ impl Device {
     ///
     /// `ptr` must be non-null and valid. It must remain valid for the lifetime of the returned
     /// instance.
-    unsafe fn from_ptr(ptr: *mut bindings::pci_dev) -> Self {
+    pub unsafe fn from_ptr(ptr: *mut bindings::pci_dev) -> Self {
         Self { ptr }
     }
 
@@ -275,6 +275,12 @@ impl Device {
     pub fn set_master(&self) {
         // SAFETY: By the type invariants, we know that `self.ptr` is non-null and valid.
         unsafe { bindings::pci_set_master(self.ptr) };
+    }
+
+    /// disables bus-mastering for device
+    pub fn clear_master(&self) {
+        // SAFETY: By the type invariants, we know that `self.ptr` is non-null and valid.
+        unsafe { bindings::pci_clear_master(self.ptr) };
     }
 
     /// get legacy irq number
@@ -292,6 +298,12 @@ impl Device {
         } else {
             Ok(())
         }
+    }
+
+    /// disable device
+    pub fn disable_device(&mut self) {
+        // SAFETY: By the type invariants, we know that `self.ptr` is non-null and valid.
+        unsafe { bindings::pci_disable_device(self.ptr) };
     }
 
     /// iter PCI Resouces
@@ -323,9 +335,20 @@ impl Device {
         }
     }
 
+    /// Release selected PCI I/O and memory resources
+    pub fn release_selected_regions(&mut self, bars: i32) {
+        // SAFETY: By the type invariants, we know that `self.ptr` is non-null and valid.
+        unsafe { bindings::pci_release_selected_regions(self.ptr, bars) };
+    }
+
     /// Get address for accessing the device
     pub fn map_resource(&self, resource: &Resource, len: usize) -> Result<MappedResource> {
         MappedResource::try_new(resource.start, len)
+    }
+
+    /// Get pointer of the device
+    pub unsafe fn ptr(&self) -> *mut bindings::pci_dev {
+        self.ptr
     }
 }
 

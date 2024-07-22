@@ -13,6 +13,7 @@ use kernel::sync::Arc;
 use kernel::{pci, device, driver, bindings, net, dma, c_str};
 use kernel::device::RawDevice;
 use kernel::sync::SpinLock;
+use kernel::driver::DeviceRemoval;
 
 
 
@@ -188,6 +189,7 @@ impl net::DeviceOperations for NetDevice {
 
         Ok(())
     }
+    
 
     fn stop(_dev: &net::Device, _data: &NetDevicePrvData) -> Result {
         pr_info!("Rust for linux e1000 driver demo (net device stop)\n");
@@ -297,7 +299,36 @@ struct E1000DrvPrvData {
 
 impl driver::DeviceRemoval for E1000DrvPrvData {
     fn device_remove(&self) {
-        pr_info!("Rust for linux e1000 driver demo (device_remove)\n");
+      r_info!("Rust for linux e1000 driver demo (device_remove)\n");
+
+        self._netdev_reg.dev_get().stop(); // 确保 NetDevice 有 stop 方法
+
+        // 释放网络设备资源
+        self._netdev_reg.unregister(); // 确保 Registration<T> 有 unregister 
+        // 释放传输和接收环的内存
+        // 注意：这里需要根据实际分配内存的方式进行释放
+        // kfree(adapter->tx_ring); // 假设 tx_ring 是以某种方式分配的
+        // kfree(adapter->rx_ring); // 同上
+
+        // 解除映射特定的 MDIO 基地址（仅在 mac 类型为 e1000_ce4100 时）
+        // iounmap(hw->ce4100_gbe_mdio_base_virt);
+
+        // 解除映射硬件地址
+        // iounmap(hw->hw_addr);
+
+        // 解除映射闪存地址（如果存在）
+        // ...
+
+        // 释放 PCI 设备的选定区域
+        // pci_release_selected_regions(pdev, adapter->bars);
+
+        // 测试并设置适配器标志中的 __E1000_DISABLED 位，如果之前未设置，则返回 true
+        // ...
+
+        // 禁用 PCI 设备
+        // pci_disable_device(pdev);
+
+        // 通知内核设备已被移除
     }
 }
 
@@ -468,6 +499,16 @@ impl pci::Driver for E1000Drv {
 
     fn remove(data: &Self::Data) {
         pr_info!("Rust for linux e1000 driver demo (remove)\n");
+
+
+        // 这里添加其他全局清理逻辑，例如关闭设备电源等
+        // ...
+
+        // 调用 device_remove 来执行特定设备的清理工作
+        data.device_remove();
+
+        // 如果设备使用了中断，需要在这里注销中断
+        // ...
     }
 }
 struct E1000KernelMod {
